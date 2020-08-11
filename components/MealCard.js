@@ -2,8 +2,9 @@ import React from 'react';
 import {View, TouchableOpacity, StyleSheet, Image, Dimensions} from 'react-native';
 import TextBody from "./TextBody";
 import Colors from "../constants/Colors";
+import Characteristics from "./Characteristics";
 
-const MealCard = ({meal}) => {
+const MealCard = ({meal, onSelect}) => {
     const deviceWidth = Dimensions.get('window').width
     const {title, imageUrl, isGlutenFree, duration, affordability, complexity} = meal;
 
@@ -17,23 +18,13 @@ const MealCard = ({meal}) => {
             );
 
     if (deviceWidth < 500) {
-        infos = (
-            <View style={styles.informationContainer}>
-                <View>
-                    <TextBody style={styles.information}>{complexity.toUpperCase()}</TextBody>
-                    <TextBody style={styles.information}>{affordability.toUpperCase()}</TextBody>
-                </View>
-                <View>
-                    <TextBody style={styles.information}>Gluten Free: {isGlutenFree ? 'Yes' : 'No'}</TextBody>
-                    <TextBody style={styles.information}>Duration: {duration.toString()}m</TextBody>
-                </View>
-            </View>
-        )
+        infos = <Characteristics meal={meal}/>
+
     }
 
     return (
         <View>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={onSelect}>
                 <View style={styles.imageContainer}>
                     <Image resizeMode='cover' style={styles.image} source={{uri: imageUrl}}/>
                 </View>
@@ -81,17 +72,7 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
 
-    informationContainer: {
-        flexDirection: 'row',
-        alignItems: 'flex-end',
-        flex: 1,
-        justifyContent: 'space-evenly',
-        width: '100%'
-    },
 
-    information: {
-        fontSize: 12
-    }
 
 })
 

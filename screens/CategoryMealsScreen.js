@@ -13,7 +13,7 @@ const CategoryMealsScreen = (props) => {
 
     const renderMeal = (itemData) => {
         return (
-                <MealCard meal={itemData.item} onSelect={() => props.navigation.navigate('MealDetailScreen', {meal: itemData.item})}/>
+                <MealCard meal={itemData.item} onSelect={() => props.navigation.navigate('MealDetail', {meal: itemData.item})}/>
             )
     }
 
@@ -22,9 +22,6 @@ const CategoryMealsScreen = (props) => {
     return (
         <View>
             <FlatList data={displayedMeals} renderItem={renderMeal}/>
-            {/*<Button onPress={() => {
-                props.navigation.navigate('MealDetail')
-            }} title={'open recipe!'}/>*/}
         </View>
     )
 }
