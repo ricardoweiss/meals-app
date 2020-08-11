@@ -1,12 +1,14 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import * as Font from 'expo-font';
 
 
-const MealDetailScreen = () => {
+const MealDetailScreen = (props) => {
+    const meal = props.navigation.getParam('meal')
+
     return (
         <View>
-            <Text>MealDetailScreen</Text>
+            <Image></Image>
         </View>
     )
 }

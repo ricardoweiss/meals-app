@@ -1,11 +1,25 @@
 import React from 'react';
-import {Text, StyleSheet, TouchableOpacity, Dimensions} from 'react-native';
+import {TouchableNativeFeedback,Platform , View, StyleSheet, TouchableOpacity, Dimensions} from 'react-native';
+import TextBody from "./TextBody";
 
-const CategoryGridTile = ({title, color, id, onSelected}) => {
+const CategoryGridTile = ({title, color, onSelected}) => {
+    let TouchableCmp = TouchableOpacity;
+
+    if (Platform.OS === 'android' && Platform.Version >= 21) {
+        TouchableCmp = TouchableNativeFeedback;
+    }
+
     return (
-        <TouchableOpacity onPress={onSelected} style={{...styles.item, ...{backgroundColor: color}}}>
-            <Text>{title}</Text>
-        </TouchableOpacity>
+        <View style={styles.touch}>
+            <TouchableCmp style={styles.touch} onPress={onSelected} >
+                <View style={{...styles.item, ...{backgroundColor: color}}}>
+                    <View style={styles.titleContainer}>
+                        <TextBody style={styles.title}>{title}</TextBody>
+                    </View>
+                </View>
+            </TouchableCmp>
+        </View>
+
     )
 }
 
@@ -13,8 +27,26 @@ const styles = StyleSheet.create({
     item: {
         flex: 1,
         height: Dimensions.get('window').height / 3,
+        justifyContent: 'flex-end',
+        alignItems: 'flex-end',
+        padding: 10
+    },
+
+    touch: {
+        flex: 1
+    },
+
+    titleContainer: {
+        backgroundColor: '#fff',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        padding: 10,
+        position: 'relative',
+        borderRadius: 10
+    },
+
+    title: {
+        fontSize: 16
     }
 })
 

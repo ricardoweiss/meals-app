@@ -14,7 +14,6 @@ export const CATEGORIES = [
     new Category('c10', 'Summer', '#47fced')
 ];
 
-/*
 export const MEALS = [
     new Meal(
         'm1',
@@ -335,4 +334,4 @@ export const MEALS = [
         true,
         true
     )
-];*/
+];
