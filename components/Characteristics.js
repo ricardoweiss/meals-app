@@ -14,6 +14,10 @@ const Characteristics = ({meal}) => {
                 <TextBody style={styles.information}>Gluten Free: {isGlutenFree ? 'Yes' : 'No'}</TextBody>
                 <TextBody style={styles.information}>Duration: {duration.toString()}m</TextBody>
             </View>
+            <View>
+                <TextBody style={styles.information}>Vegan: {isVegan ? 'Yes' : 'No'}</TextBody>
+                <TextBody style={styles.information}>Vegetarian: {isVegetarian ? 'Yes' : 'No'}</TextBody>
+            </View>
         </View>)
 }
 
@@ -23,11 +27,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flex: 1,
         justifyContent: 'space-evenly',
-        width: '100%'
+        width: '100%',
+        padding: 10,
+        backgroundColor: 'orange',
+        height: 100
     },
 
     information: {
-        fontSize: 12
+        fontSize: 12,
+        marginVertical: 10
     }
 })
 

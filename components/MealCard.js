@@ -1,26 +1,10 @@
 import React from 'react';
-import {View, TouchableOpacity, StyleSheet, Image, Dimensions} from 'react-native';
+import {View, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import TextBody from "./TextBody";
 import Colors from "../constants/Colors";
-import Characteristics from "./Characteristics";
 
 const MealCard = ({meal, onSelect}) => {
-    const deviceWidth = Dimensions.get('window').width
     const {title, imageUrl, isGlutenFree, duration, affordability, complexity} = meal;
-
-    let infos = (
-        <View style={{...styles.informationContainer, ...{justifyContent: 'space-between'}}}>
-            <TextBody style={styles.information}>Gluten Free: {isGlutenFree ? 'Yes' : 'No'}</TextBody>
-            <TextBody style={styles.information}>{affordability.toUpperCase()}</TextBody>
-            <TextBody style={styles.information}>{complexity.toUpperCase()}</TextBody>
-            <TextBody style={styles.information}>Duration: {duration.toString()}m</TextBody>
-        </View>
-            );
-
-    if (deviceWidth < 500) {
-        infos = <Characteristics meal={meal}/>
-
-    }
 
     return (
         <View>
@@ -33,7 +17,10 @@ const MealCard = ({meal, onSelect}) => {
                         <TextBody numOfLines={1} style={styles.title}>{title}</TextBody>
                     </View>
                     <View style={styles.informationContainer}>
-                        {infos}
+                        <View style={{...styles.informationContainer, ...{justifyContent: 'space-evenly'}}}>
+                            <TextBody style={styles.information}>{complexity.toUpperCase()}</TextBody>
+                            <TextBody style={styles.information}>Duration: {duration.toString()}m</TextBody>
+                        </View>
                     </View>
                 </View>
             </TouchableOpacity>
@@ -72,7 +59,17 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
 
+    informationContainer: {
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        flex: 1,
+        justifyContent: 'space-evenly',
+        width: '100%'
+    },
 
+    information: {
+        fontSize: 12
+    }
 
 })
 

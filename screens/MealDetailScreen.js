@@ -47,7 +47,8 @@ MealDetailScreen.navigationOptions = (navData) => {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
+        marginBottom: 20
     },
 
     imageContainer: {
@@ -59,8 +60,7 @@ const styles = StyleSheet.create({
     },
 
     recipeContainer: {
-        alignItems: 'flex-start',
-
+        alignItems: 'flex-start'
     },
 
     titleContainer: {
