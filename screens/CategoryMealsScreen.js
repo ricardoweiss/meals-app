@@ -20,7 +20,7 @@ const CategoryMealsScreen = (props) => {
     const displayedMeals = MEALS.filter((meal) => meal.categoryIds.indexOf(catId) >= 0);
 
     return (
-        <View>
+        <View style={styles.screen}>
             <FlatList data={displayedMeals} renderItem={renderMeal}/>
         </View>
     )
@@ -32,7 +32,10 @@ CategoryMealsScreen.navigationOptions = (navData) => {
     return {headerTitle: selectedCategory.title}
 }
 const styles = StyleSheet.create({
-
+    screen: {
+        backgroundColor: '#ccc',
+        flex: 1
+    }
 })
 
 export default CategoryMealsScreen;
