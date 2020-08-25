@@ -4,7 +4,8 @@ import TextBody from "../components/TextBody";
 import Ingredient from "../components/Ingredient";
 import Step from "../components/Step";
 import Characteristics from "../components/Characteristics";
-
+import { HeaderButtons, Item} from 'react-navigation-header-buttons'
+import HeaderButton from '../components/HeaderButton'
 
 const MealDetailScreen = (props) => {
     const meal = props.navigation.getParam('meal')
@@ -41,7 +42,12 @@ const MealDetailScreen = (props) => {
 
 MealDetailScreen.navigationOptions = (navData) => {
     const meal = navData.navigation.getParam('meal')
-    return {headerTitle: meal.title}
+    return {headerTitle: meal.title,
+            headerRight: () => (<HeaderButtons HeaderButtonComponent={HeaderButton}>
+                <Item title='Favorite' iconName='ios-star' onPress={() => {
+                    console.log('hitted')
+                }}/>
+            </HeaderButtons>)}
 }
 
 const styles = StyleSheet.create({
