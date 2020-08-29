@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {View, StyleSheet, Image, ScrollView} from 'react-native';
 import TextBody from "../components/TextBody";
 import Ingredient from "../components/Ingredient";
@@ -6,9 +6,27 @@ import Step from "../components/Step";
 import Characteristics from "../components/Characteristics";
 import { HeaderButtons, Item} from 'react-navigation-header-buttons'
 import HeaderButton from '../components/HeaderButton'
+import {useSelector, useDispatch} from "react-redux";
+import {toggleFavorite} from "../store/actions/meals";
 
 const MealDetailScreen = (props) => {
     const meal = props.navigation.getParam('meal')
+
+    const isFavorite = useSelector((state) => state.meals.favoriteMeals.some(currMeal => currMeal.id === meal.id))
+
+    const dispatch = useDispatch();
+
+    const toggleFavoriteHandler = useCallback(() => {
+        dispatch(toggleFavorite(meal.id))
+    }, [dispatch, meal])
+
+    useEffect(() => {
+        props.navigation.setParams({ toggleFav: toggleFavoriteHandler})
+    }, [toggleFavoriteHandler])
+
+    useEffect(() => {
+        props.navigation.setParams({ isFav: isFavorite})
+    }, [isFavorite])
 
     return (
         <View style={styles.screen}>
@@ -42,11 +60,11 @@ const MealDetailScreen = (props) => {
 
 MealDetailScreen.navigationOptions = (navData) => {
     const meal = navData.navigation.getParam('meal')
+    const toggleFavorite = navData.navigation.getParam('toggleFav')
+    const isFav = navData.navigation.getParam('isFav')
     return {headerTitle: meal.title,
             headerRight: () => (<HeaderButtons HeaderButtonComponent={HeaderButton}>
-                <Item title='Favorite' iconName='ios-star' onPress={() => {
-                    console.log('hitted')
-                }}/>
+                <Item title='Favorite' iconName={isFav ? 'ios-star' : 'ios-star-outline'} onPress={toggleFavorite}/>
             </HeaderButtons>)}
 }
 
